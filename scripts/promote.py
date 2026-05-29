@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import json
 from dotenv import load_dotenv
 from src.database import get_connection
@@ -29,7 +34,6 @@ def promote():
         try:
             cur = conn.cursor()
 
-            # 1. INSERT event
             cur.execute(
                 """
                 INSERT INTO event (club_id, external_id, title, description, image_url, ticket_url)
@@ -46,27 +50,23 @@ def promote():
             )
             event_id = cur.lastrowid
 
-            # 2. INSERT event_category
             for category_id in categories:
                 cur.execute(
                     "INSERT INTO event_category (event_id, category_id) VALUES (%s, %s)",
                     (event_id, category_id),
                 )
 
-            # 3. INSERT event_detail (solo si hay ticket_url)
             if row["ticket_url"]:
                 cur.execute(
                     "INSERT INTO event_detail (event_id, ticket_url) VALUES (%s, %s)",
                     (event_id, row["ticket_url"]),
                 )
 
-            # 4. INSERT event_schedule
             cur.execute(
                 "INSERT INTO event_schedule (event_id, event_date) VALUES (%s, %s)",
                 (event_id, row["date"]),
             )
 
-            # 5. UPDATE scraped_events con event_id y status
             cur.execute(
                 "UPDATE scraped_events SET event_id = %s, status = 'approved' WHERE id = %s",
                 (event_id, row["id"]),

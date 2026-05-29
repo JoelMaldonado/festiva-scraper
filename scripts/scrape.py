@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from dotenv import load_dotenv
 from src.clubs import club_salt, club_rockefeller, club_kafehaerverk, club_mir
 from src.processor import process_events
