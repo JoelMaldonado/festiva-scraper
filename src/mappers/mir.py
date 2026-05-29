@@ -19,6 +19,8 @@ TAG_MAP: dict[str, int] = {
     "rockabilly": 8,
     "skatepunk": 8,
     "goth": 8,
+    "rockandroll": 8,
+    "amerikanskrock": 8,
     # Live Music (10)
     # "norsk": 10,
     # Jazz & Blues (11)
@@ -36,8 +38,10 @@ TAG_MAP: dict[str, int] = {
     "synthpop": 15,
     # Comedy & Shows (16)
     "theater": 16,
+    "impro": 16,
     # Electronic / Experimental (21)
     "elektronika": 21,
+    "eklektisk": 21,
     # Culture & Experiences (22)
     "bloomsday": 22,
     "film": 22,
@@ -46,4 +50,6 @@ TAG_MAP: dict[str, int] = {
     "menneskerettigheter": 22,
     # Metal (23)
     "metal": 23,
+    # Hip-Hop / R&B (9)
+    "rap": 24,
 }
