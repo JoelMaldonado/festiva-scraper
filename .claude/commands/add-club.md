@@ -33,7 +33,7 @@ Identifica el path exacto de cada campo:
 
 ## 3. Extraer todos los tags únicos
 
-Del JSON completo (todos los eventos), recopila todos los valores únicos del campo de tags en minúsculas. Muéstralos en consola.
+Del JSON completo (todos los eventos), recopila todos los valores únicos del campo de tags o categorias en minúsculas. Muéstralos en consola.
 
 ## 4. Crear `src/mappers/{clubName_lower}.py`
 
@@ -138,11 +138,11 @@ Reglas:
 - No agregues manejo de errores más allá del estilo de `club_salt.py`
 - No agregues comentarios salvo que el parseo de fecha sea no obvio
 
-## 6. Actualizar `main.py`
+## 6. Actualizar `scripts/scrape.py`
 
-Lee `main.py` y:
-1. Agrega el import del nuevo club junto a los existentes
-2. Agrega `all_events += club_{clubName_lower}.get_events()` junto a los otros `+=`
+Lee `scripts/scrape.py` y:
+1. Agrega el import del nuevo club junto a los existentes (en el bloque `from src.clubs import ...`)
+2. Agrega `all_events += club_{clubName_lower}.get_events()` junto a los otros `+=` dentro de `main()`
 
 Si el club estaba comentado (porque existía antes), descoméntalo en vez de duplicar.
 
