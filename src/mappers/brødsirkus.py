@@ -1,17 +1,30 @@
 TAG_MAP: dict[str, int] = {
-    # Themed (6)
-    "fotball": 6,
-    "harrypotter": 6,
-    "lotr": 6,
-    "sport": 6,
-    # Live Music (10)
-    "band": 10,
-    "live": 10,
-    "musikk": 10,
-    # Games & Quiz (14)
-    "bingo": 14,
-    "quiz": 14,
-    # Culture & Experiences (22)
-    "film": 22,
-    "vm": 22,
+    # ─── Indie / Rock (id: 8) ────────────────────────────────────────────────
+    "indierock": 8,  # archivo original
+    "postpunk": 8,  # archivo original
+    "punk": 8,  # archivo original + DJ 2032 + Jævl/Goatmilker
+    "hardcore": 8,  # archivo original
+    "alternative": 8,  # Juvo & Reform 97
+    "indie": 8,  # Juvo & Reform 97
+    "posthardcore": 8,  # Jævl + Goatmilker
+    "skatepunk": 8,  # DJ 2032
+    "punknroll": 8,  # DJ 2032
+    "techrock": 8,  # The Linebreakers
+    "geekrock": 8,  # The Linebreakers
+    "i.t": 8,  # The Linebreakers (tag con punto, verificar que scraper lo pasa igual)
+    # ─── Metal (id: 23) ──────────────────────────────────────────────────────
+    "metal": 23,  # Tomarum Dark Art / GRYLA
+    "inferno": 23,  # Inferno Metal Festival Oslo — sede oficial en Brewgata cada año
+    # ─── Live Music (id: 10) ─────────────────────────────────────────────────
+    "musikkfestoslo": 10,  # archivo original
+    # ─── Party (id: 1) ───────────────────────────────────────────────────────
+    "party": 1,  # Brewgata's Birthday Weekend
+    "birthday": 1,  # Brewgata's Birthday Weekend
+    "cake": 1,  # Brewgata's Birthday Weekend
+    "opening-party": 1,  # Tomarum Dark Art Exhibition
+    # ─── Culture & Experiences (id: 22) ──────────────────────────────────────
+    "art-exhibition": 22,  # Tomarum Dark Art Exhibition
+    "nøgneø": 22,  # Nøgne Ø Dark Horizon — evento de degustación de cerveza
+    "darkhorizon": 22,  # Nøgne Ø Dark Horizon — ídem
+    "barrelagedstout": 22,  # Nøgne Ø Dark Horizon — ídem
 }
