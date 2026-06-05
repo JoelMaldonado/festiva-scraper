@@ -1,30 +1,34 @@
 TAG_MAP: dict[str, int] = {
-    # ─── Indie / Rock (id: 8) ────────────────────────────────────────────────
-    "indierock": 8,  # archivo original
-    "postpunk": 8,  # archivo original
-    "punk": 8,  # archivo original + DJ 2032 + Jævl/Goatmilker
-    "hardcore": 8,  # archivo original
-    "alternative": 8,  # Juvo & Reform 97
-    "indie": 8,  # Juvo & Reform 97
-    "posthardcore": 8,  # Jævl + Goatmilker
-    "skatepunk": 8,  # DJ 2032
-    "punknroll": 8,  # DJ 2032
-    "techrock": 8,  # The Linebreakers
-    "geekrock": 8,  # The Linebreakers
-    "i.t": 8,  # The Linebreakers (tag con punto, verificar que scraper lo pasa igual)
-    # ─── Metal (id: 23) ──────────────────────────────────────────────────────
-    "metal": 23,  # Tomarum Dark Art / GRYLA
-    "inferno": 23,  # Inferno Metal Festival Oslo — sede oficial en Brewgata cada año
+    # ─── Themed (id: 6) ──────────────────────────────────────────────────────
+    "harrypotter": 6,  # CONFIRMADO: Nerdequiz Harry Potter  →  Tags: #harrypotter #drinks
+    "lotr": 6,  # CONFIRMADO: Nerdequiz Ringenes Herre  →  Tags: #lotr #drinks
+    "theoffice": 6,  # CONFIRMADO: Nerdequiz The Office  →  Tags: #theoffice #michaelscott #dwightschrute
+    "michaelscott": 6,  # CONFIRMADO: Nerdequiz The Office
+    "dwightschrute": 6,  # CONFIRMADO: Nerdequiz The Office
+    "fotball": 6,  # del .py original — eventos temáticos de fútbol
+    "fotballquiz": 6,  # CONFIRMADO en Broadcast (concepto conocido en Brød & Sirkus)
+    "fotballidiot": 6,  # CONFIRMADO: quiz de fútbol que organizaban en Brød & Sirkus
+    "sport": 6,  # del .py original
+    "vm": 6,  # del .py original — transmisión/temática del Mundial
+    "17mai": 6,  # CONFIRMADO: 17. Mai 2025  →  Tags: #17mai #nasjonaldag #bunad
+    "nasjonaldag": 6,  # CONFIRMADO: 17. Mai 2025
+    "bunad": 6,  # CONFIRMADO: 17. Mai 2025
     # ─── Live Music (id: 10) ─────────────────────────────────────────────────
-    "musikkfestoslo": 10,  # archivo original
-    # ─── Party (id: 1) ───────────────────────────────────────────────────────
-    "party": 1,  # Brewgata's Birthday Weekend
-    "birthday": 1,  # Brewgata's Birthday Weekend
-    "cake": 1,  # Brewgata's Birthday Weekend
-    "opening-party": 1,  # Tomarum Dark Art Exhibition
+    "band": 10,  # CONFIRMADO: Hits for Quiz  →  Tags: #band #live
+    "live": 10,  # CONFIRMADO: Hits for Quiz  →  Tags: #band #live
+    "musikk": 10,  # CONFIRMADO: Sunna's Musikk-bingo  →  Tags: #bingo #musikk
+    # ─── Games & Quiz (id: 14) ───────────────────────────────────────────────
+    "bingo": 14,  # CONFIRMADO: Fredagsbingo  →  Tags: #bingo
+    "quiz": 14,  # del .py original (todos los eventos son de Type:Quiz)
+    "allmenn": 14,  # CONFIRMADO: Den Andre Kvissen  →  Tags: #allmenn #lillelørdag
+    "lillelørdag": 14,  # CONFIRMADO: Den Andre Kvissen  →  Tags: #allmenn #lillelørdag
+    "tippe": 14,  # CONFIRMADO: Kvalifisert Gjetning  →  Tags: #tippe #flaks
+    "flaks": 14,  # CONFIRMADO: Kvalifisert Gjetning  →  Tags: #tippe #flaks
     # ─── Culture & Experiences (id: 22) ──────────────────────────────────────
-    "art-exhibition": 22,  # Tomarum Dark Art Exhibition
-    "nøgneø": 22,  # Nøgne Ø Dark Horizon — evento de degustación de cerveza
-    "darkhorizon": 22,  # Nøgne Ø Dark Horizon — ídem
-    "barrelagedstout": 22,  # Nøgne Ø Dark Horizon — ídem
+    "film": 22,  # CONFIRMADO: Film- og TV-quiz  →  Tags: #film #tv
+    "tv": 22,  # CONFIRMADO: Film- og TV-quiz  →  Tags: #film #tv
+    # ─── Party (id: 1) ───────────────────────────────────────────────────────
+    "afterwork": 1,  # CONFIRMADO: Afterwork 99  →  Tags: #afterwork #drinks #popcorn
+    "drinks": 1,  # CONFIRMADO: múltiples eventos  →  Tags: #drinks
+    "popcorn": 1,  # CONFIRMADO: Afterwork 99  →  Tags: #afterwork #drinks #popcorn
 }
