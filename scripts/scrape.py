@@ -18,6 +18,7 @@ from src.clubs import (
     club_hausmania,
     club_kj10,
     club_parkteatret,
+    club_røverstaden,
 )
 from src.processor import process_events
 
@@ -39,6 +40,7 @@ def main():
     all_events += club_hausmania.get_events()
     all_events += club_kj10.get_events()
     all_events += club_parkteatret.get_events()
+    all_events += club_røverstaden.get_events()
 
     process_events(all_events)
 
