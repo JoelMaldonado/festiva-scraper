@@ -19,6 +19,7 @@ from src.clubs import (
     club_kj10,
     club_parkteatret,
     club_røverstaden,
+    club_oconnors_irish_pub,
 )
 from src.processor import process_events
 
@@ -41,6 +42,7 @@ def main():
     all_events += club_kj10.get_events()
     all_events += club_parkteatret.get_events()
     all_events += club_røverstaden.get_events()
+    all_events += club_oconnors_irish_pub.get_events()
 
     process_events(all_events)
 
