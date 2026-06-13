@@ -19,6 +19,7 @@ TAG_MAP: dict[str, int] = {
     "sauna": 6,
     "sport": 6,
     "vin": 6,
+    "vm": 6,
     # LGBTQ+ / Drag (7)
     "drag": 7,
     "lgbtqia+": 7,
@@ -92,7 +93,6 @@ TAG_MAP: dict[str, int] = {
     "teater": 22,
     "verdensmijødag": 22,
     # "uteservering": 22,
-    "vm": 22,
     # Metal (23)
     "hardrock": 23,
     "metal": 23,
