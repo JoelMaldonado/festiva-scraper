@@ -20,7 +20,17 @@ Separa los argumentos:
 
 ## 2. Inspeccionar el endpoint
 
-Usa WebFetch para hacer GET a `eventsUrl` y analiza el JSON.
+Descarga el JSON completo a un archivo local con `curl` (NO uses WebFetch para esto: WebFetch resume/reescribe el contenido con un modelo y puede alterar, dividir o perder strings exactos como los tags).
+
+```
+curl -s "{eventsUrl}" -o ./_tmp_events.json
+```
+
+Luego inspecciona la estructura con `node` (parsea el JSON real, no un resumen):
+
+```
+node -e "const d=require('./_tmp_events.json'); console.log(JSON.stringify(d[0], null, 2))"
+```
 
 Identifica el path exacto de cada campo:
 - **external_id** — ID único e inmutable del evento (ej: `item["id"]`, `item["objectId"]`). Si no existe, detente y avisa al usuario que el endpoint no expone un ID único por evento y no se puede integrar.
@@ -33,7 +43,27 @@ Identifica el path exacto de cada campo:
 
 ## 3. Extraer todos los tags únicos
 
-Del JSON completo (todos los eventos), recopila todos los valores únicos del campo de tags o categorias en minúsculas. Muéstralos en consola.
+CRÍTICO: este paso debe ser 100% programático (con `node`), nunca a ojo ni resumido por WebFetch/un modelo. Cualquier transformación manual del texto del tag (dividir palabras, agregar/quitar espacios, normalizar guiones, etc.) está prohibida.
+
+Recorre con un script TODOS los eventos del array (sin tomar una muestra ni solo los primeros) y por cada evento recolecta TODOS los valores del campo de tags/categorías, aplicando únicamente `.toLowerCase()` — ningún otro cambio. El string debe quedar carácter por carácter idéntico al de la fuente, solo en minúsculas (ej: si el JSON tiene `"FolkRock"`, el resultado debe ser `"folkrock"`, NUNCA `"folk rock"`).
+
+Ejemplo de script:
+
+```
+node -e "
+const d=require('./_tmp_events.json');
+const tags = new Set();
+for (const item of d) {
+  for (const t of (item.tags || [])) tags.add(t.toLowerCase());
+}
+console.log('total eventos:', d.length);
+console.log('tags únicos:', [...tags].sort());
+"
+```
+
+Verifica que el conteo de eventos procesados coincida con el total real del JSON (revisa si la API pagina con `limit`/`skip`/`total` y ajusta si hace falta para cubrir TODOS los eventos). Muestra la lista completa de tags únicos en consola antes de continuar — no la abrevies ni omitas ninguno.
+
+Borra el archivo temporal (`./_tmp_events.json`) al finalizar.
 
 ## 4. Crear `src/mappers/{clubName_lower}.py`
 
@@ -70,22 +100,27 @@ Clasifica cada tag en una de estas categorías del sistema Festiva. Si un tag no
 Crea el archivo con este formato (usa `src/mappers/salt.py` como referencia de estilo):
 
 ```python
-TAG_MAP: dict[str, int] = {
+TAG_MAP: dict[str, int | list[int]] = {
     # Party (1)
     "tag1": 1,
     "tag2": 1,
 
+    # Pop (15) + Electronic / Experimental (21)
+    "tag3": [15, 21],
+
     # Techno / House (4)
-    "tag3": 4,
+    "tag4": 4,
     ...
 }
 ```
 
 Reglas:
 - Todas las keys en minúsculas
+- Cada key debe ser una copia textual exacta del tag obtenido en el paso 3 (mismos caracteres, espacios, guiones, símbolos). No reescribas ni "corrijas" el texto del tag.
+- Revisa el tag de TODOS los tags únicos del paso 3 y clasifícalo; ninguno debe quedar sin revisar
 - Agrupa por categoría con comentario
-- Si un tag encaja en varias categorías, elige la más específica
-- Omite tags que no encajan en ninguna categoría
+- El valor normal es un `int` (una sola categoría). Si el tag describe géneros/temáticas que encajan claramente en más de una categoría (ej: "elektronisk pop" es tanto Pop (15) como Electronic / Experimental (21)), usa una lista `[a, b]`. Esto es la excepción, no la regla — no fuerces múltiples categorías si una sola ya describe bien el tag
+- Omite tags que no encajan en ninguna categoría — esto incluye metadatos que no describen un género/temática, como tags de idioma (ej: "english"), o tags que repiten el nombre del propio club/venue
 
 ## 5. Crear `src/clubs/club_{clubName_lower}.py`
 
@@ -114,6 +149,14 @@ def get_events() -> list[Event]:
 
         tags = item.get("tags") or []
 
+        categories = set()
+        for t in tags:
+            mapped = TAG_MAP.get(t.lower())
+            if isinstance(mapped, list):
+                categories.update(mapped)
+            elif mapped is not None:
+                categories.add(mapped)
+
         events.append(
             Event(
                 club_id=CLUB_ID,
@@ -125,7 +168,7 @@ def get_events() -> list[Event]:
                 image_url=...,
                 ticket_url=...,
                 tags=tags,
-                categories=list({TAG_MAP[t.lower()] for t in tags if t.lower() in TAG_MAP}),
+                categories=list(categories),
             )
         )
 
@@ -137,6 +180,7 @@ Reglas:
 - Si un campo opcional no existe, usa `None`
 - No agregues manejo de errores más allá del estilo de `club_salt.py`
 - No agregues comentarios salvo que el parseo de fecha sea no obvio
+- El bloque que calcula `categories` (manejando tags mapeados a un `int` o a `list[int]`) se usa siempre, incluso si en este club ningún tag usa lista — mantiene el código consistente entre clubs
 
 ## 6. Actualizar `scripts/scrape.py`
 
