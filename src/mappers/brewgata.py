@@ -12,9 +12,12 @@ TAG_MAP: dict[str, int] = {
     "techrock": 8,  # The Linebreakers
     "geekrock": 8,  # The Linebreakers
     "i.t": 8,  # The Linebreakers (tag con punto, verificar que scraper lo pasa igual)
+    "rock": 8,  # Nitrobitch + The Pink Eye / YONA YONA + Inglorious Retards
     # ─── Metal (id: 23) ──────────────────────────────────────────────────────
     "metal": 23,  # Tomarum Dark Art / GRYLA
     "inferno": 23,  # Inferno Metal Festival Oslo — sede oficial en Brewgata cada año
+    "metalcore": 23,  # FILTH + XOXO + THEFALLS
+    "deathcore": 23,  # FILTH + XOXO + THEFALLS
     # ─── Live Music (id: 10) ─────────────────────────────────────────────────
     "musikkfestoslo": 10,  # archivo original
     # ─── Party (id: 1) ───────────────────────────────────────────────────────
@@ -27,4 +30,5 @@ TAG_MAP: dict[str, int] = {
     "nøgneø": 22,  # Nøgne Ø Dark Horizon — evento de degustación de cerveza
     "darkhorizon": 22,  # Nøgne Ø Dark Horizon — ídem
     "barrelagedstout": 22,  # Nøgne Ø Dark Horizon — ídem
+    "art": 22,  # Petter Baarli // Kunstutstilling
 }
